@@ -8,3 +8,12 @@ def login():
     
     credenciais = [usuario,senha]
     return credenciais
+
+def lobby(permissao):
+    print('#############################################')
+    print('#            CONTROLE DE ESTOQUE            #')
+    print('#############################################')
+    print('#    Digite:                                #')
+    print('#    1)Para exibir produto(s)               #')
+    print('#    2)Para editar protuo(s)                #')
+    print('#seu nivel de permissao é', permissao.upper)
