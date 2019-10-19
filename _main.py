@@ -20,6 +20,9 @@ def main():
         if login_dic == login_usr:
             if senha_dic == senha_usr:
                 permissao = admin
+                if menu.menu_usr(permissao) == '1':
+                    menu.estoque()
+
     
     if permissao != admin:
         for elto in login.credencial_proletario:
@@ -31,9 +34,10 @@ def main():
             if login_dic == login_usr:
                 if senha_dic == senha_usr:
                     permissao = vendedor
+                    menu.menu_usr(permissao)
     if permissao != admin and permissao != vendedor:
         print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
-    print('\33[1;34mpermissao: \33[m', permissao)
+    print('\33[1,92mpermissao:\33[m',permissao)
     
 
     input()
