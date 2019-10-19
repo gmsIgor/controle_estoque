@@ -10,7 +10,7 @@ def main():
     login_dic : str
     login_usr : str
     senha_dic : str
-    senha_usr : str 
+    senha_usr : str
 
     for elto in login.credencial_admin: #serve pra varrer o dicionário
         login_dic = elto.replace(' ', '').lower()
@@ -35,7 +35,7 @@ def main():
         print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
     print('\33[1;34mpermissao: \33[m', permissao)
     
-    
+
     input()
     return 0
 
