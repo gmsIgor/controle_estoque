@@ -2,20 +2,41 @@ import menu, login
 
 
 def main():
-    admin = False
+    admin = 'admin'
+    vendedor = 'vendedor'
+    permissao = 'no_permission'
     credenciais =  menu.login()
-
-    for elto in login.credencial_admin:
-        print(credenciais)
-        print(credenciais[0], elto)
-        print(credenciais[1], login.credencial_admin[elto])
-        if credenciais[0].lower == str(elto.lower):
-            print('eita -------------------------')
-        if credenciais[0].lower == str(elto.lower) and credenciais[1].lower == str(login.credencial_admin[elto].lower):
-            print('deu bom')
-            admin = True
-
     
+    login_dic : str
+    login_usr : str
+    senha_dic : str
+    senha_usr : str 
+
+    for elto in login.credencial_admin: #serve pra varrer o dicionário
+        login_dic = elto.replace(' ', '').lower()
+        login_usr = credenciais[0].replace(' ', '').lower()
+        senha_dic = login.credencial_admin[elto].replace(' ', '').lower()
+        senha_usr = credenciais[1].replace(' ', '').lower()
+        if login_dic == login_usr:
+            if senha_dic == senha_usr:
+                permissao = admin
+    
+    if permissao != admin:
+        for elto in login.credencial_proletario:
+            login_dic = elto.replace(' ', '').lower()
+            login_usr = credenciais[0].replace(' ', '').lower()
+            senha_dic = login.credencial_proletario[elto].replace(' ', '').lower()
+            senha_usr = credenciais[1].replace(' ', '').lower()
+
+            if login_dic == login_usr:
+                if senha_dic == senha_usr:
+                    permissao = vendedor
+    if permissao != admin and permissao != vendedor:
+        print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
+    print('\33[1;34mpermissao: \33[m', permissao)
+    
+    
+    input()
     return 0
 
 main()

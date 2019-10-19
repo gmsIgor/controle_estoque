@@ -6,5 +6,5 @@ credencial_proletario = {
 credencial_admin = {
     "garcia":"garciagarcia",
     "pedro":"aragao",
-    "jaime":"djfas"
+    "jaime":"djfgfhdas"
 }
