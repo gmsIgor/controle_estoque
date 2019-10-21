@@ -1,4 +1,6 @@
 import os
+import itertools
+import math 
 
 def login():
     print('#############################################')
@@ -47,25 +49,49 @@ def menu_usr(permissao):
         escolha = input()
         return escolha
 
-def estoque():
+def estoque(permissao):
     pg = 1
-    estoque = open('estoque.txt')
+    linha = 5
+    linhaant = 0
+    estoque = open('estoque.txt','r')
+    num_lines = sum(1 for line in estoque)
+    pgtot = math.ceil(num_lines/5)
+    pgtr = int(pgtot)
     while True:
-        print(pg, 'aquiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#      Produtos                Quantidade     #')
         print('#                                             #')
-        for i, line in enumerate(estoque):
-            linha = line.replace('\n', '')
-            info = linha.split(';') 
-            print(info[1], '         ', info[2])
-            if i == 3:
-                print('pág.', pg)
-                print('(a) voltar pág. | proxima pág. (d)')
-                break
-        opcao = str(input())
-        if opcao == 'a' and pg != 1:
-            pg -= 1
-        elif opcao == 'd':
-            pg += 1
+        with open('estoque.txt','r') as estoque:
+            for line in itertools.islice(estoque,linhaant,linha):
+                words = line.replace('\n','')
+                info = words.split(';')
+                print('#   %-20s        %10s    #'%(info[1],info[2]))
+        print('#                                             #')
+        print('#                   pág {}/%-3s                 #'.format(pg)%(pgtot))
+        print('#       (a) voltar pág | próxima pág (d)      #')
+        print('#                                             #')
+        print('#        voltar para o menu de usuário        #')
+        print('#                  digite(s)                  #')
+        print('#                                             #')
+        print('###############################################')
+        escolha = input()
+        if escolha == 'a':
+            linha -= 5
+            linhaant -= 5
+            if linhaant <= 0:
+                linha = 5
+                linhaant = 0
+        elif escolha == 'd':
+            linha += 5
+            linhaant += 5
+            if linha >= num_lines:
+                linhaant = num_lines-5
+                linha = num_lines
+        elif escolha == 's':
+            menu_usr(permissao)
+
+    
+        
+        

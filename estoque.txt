@@ -2,10 +2,11 @@
 2;salgado;20
 3;seda;16
 4;boldin;39
-5;brownie;400
+5;brownie;4000000
 6;coca-cola;5
 7;elojob;10
-8;boquete do colonna;5
+8;bolo;5
 9;chifre;4
-10;café pro colonna parar de dormir na aula;10
+10;cafe;10
 11;capuccino;10
+

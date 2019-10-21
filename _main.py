@@ -21,7 +21,7 @@ def main():
             if senha_dic == senha_usr:
                 permissao = admin
                 if menu.menu_usr(permissao) == '1':
-                    menu.estoque()
+                    menu.estoque(permissao)
 
     
     if permissao != admin:
@@ -44,4 +44,3 @@ def main():
     return 0
 
 main()
-
