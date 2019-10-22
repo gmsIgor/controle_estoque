@@ -53,12 +53,13 @@ def estoque(permissao):
     pg = 1
     linha = 5
     linhaant = 0
+    linhatemp = 0
     estoque = open('estoque.txt','r')
     num_lines = sum(1 for line in estoque)
     pgtot = math.ceil(num_lines/5)
     pgtr = int(pgtot)
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        #os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#      Produtos                Quantidade     #')
@@ -80,15 +81,22 @@ def estoque(permissao):
         if escolha == 'a':
             linha -= 5
             linhaant -= 5
+            pg -= 1
             if linhaant <= 0:
                 linha = 5
                 linhaant = 0
+                pg = 1
         elif escolha == 'd':
+            linhatemp = linhaant
+            linhaant = linha
             linha += 5
-            linhaant += 5
+            pg += 1
             if linha >= num_lines:
-                linhaant = num_lines-5
                 linha = num_lines
+                pg = pgtot
+            print(linhatemp)
+            print(linhaant) 
+            print(linha)
         elif escolha == 's':
             menu_usr(permissao)
 
