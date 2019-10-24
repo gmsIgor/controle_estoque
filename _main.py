@@ -6,19 +6,14 @@ def main():
     permissao = 'no_permission'
     credenciais =  menu.login()
 
-
-
-    permissao = credencia(login.credencial_admin, credenciais, ADMIN)
-
+    credencia(login.credencial_admin, credenciais, ADMIN)
 
     if permissao != ADMIN:
-        permissao = credencia(login.credencial_proletario, credenciais, VENDEDOR)
+        credencia(login.credencial_proletario, credenciais, VENDEDOR)
 
     if permissao != ADMIN and permissao != VENDEDOR:
         print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
     print('\33[1,92mpermissao:\33[m',permissao)
-
-
 
 def credencia(credencial, credenciais, perm):
     login_dic : str
@@ -38,6 +33,5 @@ def credencia(credencial, credenciais, perm):
                     escolha = menu.menu_usr(permissao)
                     if escolha == '1':
                         menu.estoque(permissao)
-        return permissao
 
 main()

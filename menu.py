@@ -18,37 +18,42 @@ def login():
     return credenciais
 
 def menu_usr(permissao):
-    while True:
-        if permissao == 'admin':
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print('##############CONTROLE DE ESTOQUE##############')
-            print('#                                             #')
-            print('#  Exibir produto(s), Digite(1)               #')
-            print('#                                             #')
-            print('#  Adicionar produto(s), Digite(2)            #')
-            print('#                                             #')
-            print('#  Editar produto(s), Digite(3)               #')
-            print('#                                             #')
-            print('#  Cadastrar novo funcionário, Digite(4)      #')
-            print('#                                             #')
-            print('#  Voltar para a tela de login, Digite(5)     #')
-            print('#                                             #')
-            print('#  Seu nível de permissão atual é de \33[36mADM\33[m      #')
-            print('#                                             #')
-            print('###########3###################################')
-            escolha = input()
-            return escolha
-        elif permissao == 'vendedor':
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print('##############CONTROLE DE ESTOQUE##############')
-            print('#                                             #')
-            print('#  Exibir produto(s), Digite(1)               #')
-            print('#                                             #')
-            print('#  Seu nível de permissão atual é de \33[92mVENDEDOR\33[m #')
-            print('#                                             #')
-            print('###############################################')
-            escolha = input()
-            return escolha
+    if permissao == 'admin':
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#  Exibir produto(s), Digite(1)               #')
+        print('#                                             #')
+        print('#  Adicionar produto(s), Digite(2)            #')
+        print('#                                             #')
+        print('#  Editar produto(s), Digite(3)               #')
+        print('#                                             #')
+        print('#  Cadastrar novo funcionário, Digite(4)      #')
+        print('#                                             #')
+        print('#  Voltar para a tela de login, Digite(5)     #')
+        print('#                                             #')
+        print('#  Seu nível de permissão atual é de \33[36mADM\33[m      #')
+        print('#                                             #')
+        print('###########3###################################')
+        escolha = input()
+        return escolha
+    elif permissao == 'vendedor':
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#  Exibir produto(s), Digite(1)               #')
+        print('#                                             #')
+        print('#  Seu nível de permissão atual é de \33[92mVENDEDOR\33[m #')
+        print('#                                             #')
+        print('###############################################')
+        escolha = input()
+        return escolha
+
+def add_prod(permissao):
+    return 0
+
+def edit_prod(permissao):
+    return 0
 
 def estoque(permissao):
     pg = 1
@@ -100,6 +105,6 @@ def estoque(permissao):
             print(linhaant)
             print(linha)
         elif escolha == 's':
-            break              #preciso resolver
+            break
 
 
