@@ -1,6 +1,6 @@
 import os
 import itertools
-import math 
+import math
 
 def login():
     print('#############################################')
@@ -13,7 +13,7 @@ def login():
     senha = str(input())
     print('#                                           #')
     print('#############################################')
-    
+
     credenciais = [usuario,senha]
     return credenciais
 
@@ -57,9 +57,8 @@ def estoque(permissao):
     estoque = open('estoque.txt','r')
     num_lines = sum(1 for line in estoque)
     pgtot = math.ceil(num_lines/5)
-    pgtr = int(pgtot)
     while True:
-        #os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#      Produtos                Quantidade     #')
@@ -79,7 +78,7 @@ def estoque(permissao):
         print('###############################################')
         escolha = input()
         if escolha == 'a':
-            linha -= 5
+            linha = linhaant
             linhaant -= 5
             pg -= 1
             if linhaant <= 0:
@@ -92,14 +91,14 @@ def estoque(permissao):
             linha += 5
             pg += 1
             if linha >= num_lines:
+                if linhaant >= num_lines:
+                    linhaant = linhatemp
                 linha = num_lines
                 pg = pgtot
             print(linhatemp)
-            print(linhaant) 
+            print(linhaant)
             print(linha)
         elif escolha == 's':
-            menu_usr(permissao)
+            menu_usr(permissao)               #preciso resolver
 
-    
-        
-        
+
