@@ -1,20 +1,20 @@
 import menu, login
 
 def main():
-    admin = 'admin'
-    vendedor = 'vendedor'
+    ADMIN = 'admin'
+    VENDEDOR = 'vendedor'
     permissao = 'no_permission'
     credenciais =  menu.login()
 
 
 
-    credencia(login.credencial_admin, credenciais, admin)
+    permissao = credencia(login.credencial_admin, credenciais, ADMIN)
 
 
-    if permissao != admin:
-        credencia(login.credencial_proletario, credenciais, vendedor)
+    if permissao != ADMIN:
+        permissao = credencia(login.credencial_proletario, credenciais, VENDEDOR)
 
-    if permissao != admin and permissao != vendedor:
+    if permissao != ADMIN and permissao != VENDEDOR:
         print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
     print('\33[1,92mpermissao:\33[m',permissao)
 
@@ -25,7 +25,7 @@ def credencia(credencial, credenciais, perm):
     login_usr : str
     senha_dic : str
     senha_usr : str
-    
+
     for elto in credencial: #serve pra varrer o dicionário
         login_dic = elto.replace(' ', '').lower()
         login_usr = credenciais[0].replace(' ', '').lower()
@@ -38,5 +38,6 @@ def credencia(credencial, credenciais, perm):
                     escolha = menu.menu_usr(permissao)
                     if escolha == '1':
                         menu.estoque(permissao)
+        return permissao
 
 main()
