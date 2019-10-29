@@ -1,6 +1,6 @@
-def criar_estoque():
+def add_prod():
     escolha = 1
-    estoquedic=[]
+    estoquelist=[]
     estoque = open("estoque.txt",'a')
     
     while escolha == 1:
@@ -11,14 +11,17 @@ def criar_estoque():
         if escolha < 1 or escolha > 2:
             print('Entre com uma opcao valida')
             escolha = int(input('digite(1) para continuar editando ou (2)'))
-        estoquedic.append(produto) 
-        estoque.writelines(str(produto.items())+ ';' +'\n')
-      
-    for i in estoquedic:
-        print(i,';','\n')
-    return(estoquedic)
+        estoquelist.append(produto) 
+        contador = 0
+        for contador in range (0,len(estoquelist)):
 
-criar_estoque()
+            estoque.write(str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
+
+
+      
+    
+
+add_prod()
 
 
 

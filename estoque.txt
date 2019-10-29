@@ -8,4 +8,16 @@
 8;bolo;5
 9;chapeu;322
 10;cafe;10
-11;capuccino;10
+11;capuccino;10dict_items([('Nome:', 'crack'), ('quantidade:', 500)]);
+dict_items([('Nome:', 'loló'), ('quantidade:', 20)]);
+dict_items([('Nome:', 'black lança'), ('quantidade:', 1000)]);
+eu;2000eu;2000joao;3000eu;2000joao;3000igor;5000banaan;1
+banaan;1
+luis;3000
+banaan;1
+luis;3000
+igor;3000
+banaan;1
+luis;3000
+igor;3000
+raphael;0
