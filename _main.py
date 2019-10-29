@@ -33,5 +33,6 @@ def credencia(credencial, credenciais, perm):
                     escolha = menu.menu_usr(permissao)
                     if escolha == '1':
                         menu.estoque(permissao)
+                
 
 main()

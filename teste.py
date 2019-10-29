@@ -18,7 +18,7 @@ def criar_estoque():
         print(i,';','\n')
     return(estoquedic)
 
-
+criar_estoque()
 
 
 
