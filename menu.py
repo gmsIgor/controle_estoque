@@ -69,8 +69,7 @@ def add_prod():
        
         for contador in range (0,len(estoquelist)):
 
-            estoque.write(str(num_lines+1)+';' + str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
-            num_lines += 1
+            estoque.write(str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
         
 
 
@@ -97,7 +96,7 @@ def estoque(permissao):
             for line in itertools.islice(estoque,linhaant,linha):
                 words = line.replace('\n','')
                 info = words.split(';')
-                print('#   %-20s        %10s    #'%(info[1],info[2]))
+                print('#   %-20s        %10s    #'%(info[0],info[1]))
         print('#                                             #')
         print('#                   pág {}/%-3s                 #'.format(pg)%(pgtot))
         print('#       (a) voltar pág | próxima pág (d)      #')
