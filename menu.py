@@ -52,24 +52,28 @@ def menu_usr(permissao):
 def add_prod():
     escolha = 1
     estoquelist=[]
-    estoque = open("estoque.txt",'a')
-    
+    estoque = open("estoque.txt",'r+')
+    num_lines = sum(1 for line in estoque)
     while escolha == 1:
         nome = input('entre com o nome do item  ')
         quantidade = int(input('Entre com a quantidade do item  '))
         produto = {"Nome:": nome,"quantidade:": quantidade} 
         escolha = int(input ('digite(1) para continuar editando ou (2) para sair  '))
-        if escolha < 1 or escolha > 2:
+        while escolha != 1 and escolha!= 2:
+            
             print('Entre com uma opcao valida')
             escolha = int(input('digite(1) para continuar editando ou (2)'))
+            
         estoquelist.append(produto) 
-        for contador in range len(estoquelist) :
+        contador = 0
+       
+        for contador in range (0,len(estoquelist)):
 
-            estoque.write(
-      
-    for i in estoquelist:
-        print(i,';','\n')
-    return(estoquelist)
+            estoque.write(str(num_lines+1)+';' + str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
+            num_lines += 1
+        
+
+
 
     
 def edit_prod(permissao):

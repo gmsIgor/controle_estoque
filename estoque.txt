@@ -21,3 +21,33 @@ banaan;1
 luis;3000
 igor;3000
 raphael;0
+25agua;25
+26agua;25
+26loló;40
+27agua;25
+27loló;40
+27cocaina;500
+28agua;25
+28loló;40
+28cocaina;500
+28black lança;30
+35;oi;10
+36;oi;10
+36;dildo;40
+37;agua;30
+38;agua;30
+39;coco;50
+40;agua;30
+41;coco;50
+42;mae do igor;2
+43;agua;25
+44;mae do igor;a
+45;agua;25
+46;agua;25
+47;banana;40
+48;agua;25
+49;agua;25
+50;banana;40
+51;agua;25
+52;banana;40
+53;2;2
