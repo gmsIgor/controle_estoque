@@ -36,6 +36,9 @@ def credencia(credencial, credenciais, perm):
                     elif permissao == 'admin':
                         if escolha == '2':
                             menu.add_prod()
-                
-
+                        if escolha == '3':
+                            menu.edit_prod()
+                        if escolha == '4':
+                            menu.cadastro_usr()
+                    #elif escolha == '5':  #Não sei voltar para o menu de login
 main()

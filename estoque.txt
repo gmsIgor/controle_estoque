@@ -1,4 +1,4 @@
-brigadeiro;10
+bolo;10
 salgado;20232
 bombom;16
 bola;39
@@ -11,3 +11,10 @@ cafe;10
 capuccino;10
 chocolate;21
 alcool em gel;24
+batata;12
+bola de gude;15
+pastel;4
+mandioca;6
+leite;40
+vinho;2
+rinosoro;13
