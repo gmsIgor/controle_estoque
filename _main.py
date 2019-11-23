@@ -39,6 +39,6 @@ def credencia(credencial, credenciais, perm):
                         if escolha == '3':
                             menu.edit_prod()
                         if escolha == '4':
-                            menu.cadastro_usr()
+                            menu.cadastro_usr(login.credencial_proletario,login.credencial_admin)
                     #elif escolha == '5':  #Não sei voltar para o menu de login
 main()

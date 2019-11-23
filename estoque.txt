@@ -18,3 +18,5 @@ mandioca;6
 leite;40
 vinho;2
 rinosoro;13
+garrafa;500
+lápis;24
