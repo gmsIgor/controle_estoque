@@ -1,4 +1,5 @@
-import menu, login
+import menu
+import login
 
 def main():
     ADMIN = 'admin'
@@ -39,6 +40,6 @@ def credencia(credencial, credenciais, perm):
                         if escolha == '3':
                             menu.edit_prod()
                         if escolha == '4':
-                            menu.cadastro_usr(login.credencial_proletario,login.credencial_admin)
+                            menu.cadastro_usr(login.credencial_admin,login.credencial_proletario)
                     #elif escolha == '5':  #Não sei voltar para o menu de login
 main()

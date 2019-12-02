@@ -134,7 +134,6 @@ def cadastro_usr(adm,vnd):
 
         regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
         if opcao == 'r':
-            print(adm)
             if login in adm or login in vnd:
                 print('\33[1;31mERRO: Usuário já existe, tente novamente\33[m')
                 time.sleep(.500)
@@ -154,11 +153,13 @@ def cadastro_usr(adm,vnd):
                 time.sleep(.500)
             else:
                 if perm == 'ADM':
-                    #terminar
-                    print()
+                    adm[login] = senha
+                    print('add_adm')
+                    return adm,vnd
                 elif perm == 'VND':
-                    #terminar
-                    print()
+                    vnd[login] = senha
+                    print('add_vnd')
+                    return adm,vnd
         elif opcao == 's':
             break
         else:
