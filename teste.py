@@ -1,54 +1,41 @@
-def add_prod():
-    escolha = str(1)
-    estoquelist=[]
-    estoque = open("estoque.txt",'r+')
-    num_lines = sum(1 for line in estoque)
-    while escolha == str(1):
-        nome = input('entre com o nome do item  ')
-        quantidade = input('Entre com a quantidade do item  ')
-        while not quantidade.isnumeric()  :
-            print('Entre com uma opção válida  : \n')
-            escolha = input('digite (1) para continuar ou (2) para sair \n')
-            quantidade = input('Entre com a nova quantidade')
-        while int(quantidade) < 0 :
-            print('Entre com uma opção válida : \n')
-            
-            escolha = input('digite (1) para continuar ou (2) para sair \n')
-            quantidade = input('Entre com a nova quantidade1')
-        produto = {"Nome:": nome,"quantidade:": quantidade} 
-        escolha = input ('digite(1) para continuar editando ou (2) para sair  ')
-        while escolha != str(1) and escolha != str(2):
-            print('Entre com uma opcao valida : \n')
-            escolha = input('digite(1) para continuar editando ou (2)')
-        estoquelist.append(produto) 
-        contador = 0
-       
+def editar_prod():
+    estoque = open ('estoque.txt','r+')
 
-        for contador in range (0,len(estoquelist)):
+    estoque.seek(0,0)
 
-            estoque.write(str(num_lines+1)+';' + str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
-            num_lines += 1
+    produtos_list = []
 
-      
+    estoque_string = estoque.readlines()
+
+    for line in estoque_string :
+
+        line = line[:-1]
+
+        linha = line.split(';')
+
+        produtos_list.append(linha)
+
+
+
+
+    print(produtos_list)
+
+
+
+    produto = input('Entre com o produto : \n')
+    for contador in range (0,len(produtos_list)) :
     
+        if produtos_list[contador][0] == produto :
 
-add_prod()
+            linha_produto = contador 
 
-
-
-
-def exibir_estoque():
-    contador = 0
-    estoque = open('estoque.txt','r')
-    for i in estoque:
-        print(i ,';','\n')
+            print ('O produto esta na linha' + '\t' + str(contador))
+    
+            
+    
+    linha_remove = int(input('Entre com a linha que deseja excluir\n'))
+    produtos_list.pop(linha_remove)
+    estoque.writelines(str(produtos_list))
+    print(produtos_list)
     estoque.close()
-
-
-
-
-
-
-
-
-
+editar_prod()
