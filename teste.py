@@ -11,9 +11,10 @@ def editar_prod():
 
         line = line[:-1]
 
-        linha = line.split(';')
+        linha = line.split(';') 
 
         produtos_list.append(linha)
+        
 
 
 
@@ -35,7 +36,37 @@ def editar_prod():
     
     linha_remove = int(input('Entre com a linha que deseja excluir\n'))
     produtos_list.pop(linha_remove)
+    estoque= open('estoquenovo.txt','w')
     estoque.writelines(str(produtos_list))
     print(produtos_list)
     estoque.close()
-editar_prod()
+
+
+
+
+
+
+
+
+
+
+
+
+def editar_prod2():
+    estoque = open('estoque.txt','r+')
+    estoque_string = estoque.readlines()
+    estoque.seek(0,0)
+    
+    for line in estoque_string:
+        line = line[:-1]
+        linha = line.split(';')
+        cont = 0
+        for cont in range(0,len(estoque_string)):
+            Nome =linha[0]
+            Quantidade = linha[1]
+            
+            cont +=1
+    
+        produto = {'Nome:':Nome,'Quantidade:':Quantidade}
+    print (produto)
+editar_prod2()
