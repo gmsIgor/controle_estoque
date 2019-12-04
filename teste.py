@@ -1,5 +1,5 @@
 def edit_prod():
-    #função que exclui ou altera a quantidade de  um produto.
+    #função que exclui ou altera a quantidade de  um produto, ou muda nome.
 
 estoque = open ('estoque.txt','r+')
 
@@ -26,7 +26,7 @@ for contador in range (0,len(produtos_list)) :
 
   if produtos_list[contador][0] == produto :
     
-    print('Deseja excluir o produto? Digite 1 para sim e 0 para não.\n')
+    print('Entre com 1 para excluir,2 para alterar a quantidade ou 3 para renomear.\n')
     
     escolha =int(input())
 
@@ -34,12 +34,15 @@ for contador in range (0,len(produtos_list)) :
 
       produtos_list.pop(contador)
 
-    if escolha == 0:
+    if escolha == 2:
 
       print('Entre com a nova quantidade do produto : ')
       quantidade = input()
       produtos_list[contador][1] = quantidade
+    if escolha == 3 :
 
+        novo_nome=input('Entre com o novo nome :\n')
+        produtos_list[contador][0] =  novo_nome
     break
 
 
