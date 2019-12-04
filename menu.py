@@ -80,11 +80,16 @@ def add_prod():
         opcao = str(input())
         if opcao == 'r':
             estoque = open('estoque.txt','r')
-            produtos = estoque.read()
-            if nome in produtos:
-                print('\33[1;31mERRO: Produto já existe, tente novamente\33[m')
-                estoque.close()
-            elif len(nome) > 20 or len(quant) > 10:
+            produtos = estoque.readlines()
+            print(produtos)
+            cont = 0
+            for index in produtos:
+                if nome in produtos[cont]:
+                    print('\33[1;31mERRO: Produto já existe, tente novamente\33[m')
+                    time.sleep(1.500)
+                    estoque.close()
+                cont += 1
+            if len(nome) > 20 or len(quant) > 10:
                 print('\33[1;31mERRO: Nome ou quantidade inválidos, tente novamente\33[m')
                 time.sleep(.500)
             elif not quant.isnumeric():
@@ -104,8 +109,103 @@ def add_prod():
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
     
-def edit_prod(permissao):
+def edit_prod():
+    while True:
+        #os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#         Qual produto deseja editar?         #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#  Nome do Produto: ', end='')
+        nome = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        if opcao == 'r':
+            estoque = open('estoque.txt','r')
+            produtos = estoque.readlines()
+            num_lines = sum(1 for line in estoque)
+            lista_estoque = []
+            print(produtos)
+            check = 0
+            for index in produtos:
+                index = index[:-1]
+                linhas = index.split(';')
+                lista_estoque.append(linhas)
+            for cont in range(len(lista_estoque)):
+                if lista_estoque[cont][0] == nome:
+                    edit_prod_2(lista_estoque[cont][0],lista_estoque[cont][1])
+                    break
+                else:
+                    check = 1
+            if check == 1:
+                print('\33[1;31mERRO: Produto não encontrado, tente novamente\33[m')
+                time.sleep(.500)
+
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
+
+def edit_prod_2(nome,quant):
+    while True:
+        #os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#        Editando {:^20}        #'.format(nome))
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#  Para alterar a quantidade, Digite(1)       #')
+        print('#  Para alterar o nome, Digite(2)             #')
+        print('#  Para remover o produto, Digite(3)          #')
+        print('#  Para voltar ao menu de usuário, Digite(4)  #')
+        print('#                                             #')
+        print('#                                Qtd.         #')
+        print('#     {:<20}     {:^10}     #'.format(nome,quant))
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        if opcao == '1':
+            altera_quant()
+        elif opcao == '2':
+            altera_nome()
+        elif opcao == '3':
+            remove_prod()
+        
+    
+def altera_quant():
+    while True:
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#            Alterando  Quantidade            #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#  Quantidade: ', end='')
+        quant = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+
+def altera_nome():
     return 0
+def remove_prod():
+    return 0 
+
 
 def cadastro_usr(adm,vnd):
     while True:
@@ -120,9 +220,8 @@ def cadastro_usr(adm,vnd):
         login = str(input())
         print('#  Senha: ',end='')
         senha = str(input())
-        print('#  Nível de permissão: ',end='')
+        print('#  Nível de permissão (ADM/VND): ',end='')
         perm = str(input())
-        print('#  (ADM/VND)                                  #')
         print('#                                             #')
         print('###############################################')
         print('#                                             #')
