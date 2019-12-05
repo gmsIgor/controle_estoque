@@ -478,14 +478,14 @@ def altera_login(login_usr,permissao):
                 biri.salva_credenciais()
                 print('\33[1;92mLogin alterado com sucesso\33[m')
                 time.sleep(.500)
-                break
+                return login
         elif opcao == 's':
-            break
+            return login_usr
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
     
-    return login
+    
                 
 
 
