@@ -93,7 +93,7 @@ def add_prod():
                 print('\33[1;31mERRO: Nome ou quantidade inválidos, tente novamente\33[m')
                 time.sleep(.500)
             elif not quant.isnumeric():
-                print('\33[1;31mERRO: Quantidade Inválida, tente novamente\33[m')
+                print('\33[1;31mERRO: Nome ou quantidade inválidos, tente novamente\33[m')
                 time.sleep(.500)
             else:
                 estoque.close()
@@ -108,10 +108,31 @@ def add_prod():
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
-    
+
+def procura_prod(produto):
+    estoque = open ('estoque.txt','r+')
+    estoque.seek(0,0)
+    produtos_list = []
+    estoque_string = estoque.readlines()
+    for line in estoque_string :
+        line = line[:-1]
+        linha = line.split(';')
+        produtos_list.append(linha)
+    contador = 0
+    produto_em_estoque = 0
+    for contador in range (0,len(produtos_list)):
+        if produtos_list[contador][0] == produto :
+            produto_em_estoque = 1
+            return 1
+            break
+    if produto_em_estoque == 0 :
+        return 0
+
+
+
 def edit_prod():
     while True:
-        #os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#         Qual produto deseja editar?         #')
@@ -141,7 +162,7 @@ def edit_prod():
                 lista_estoque.append(linhas)
             for cont in range(len(lista_estoque)):
                 if lista_estoque[cont][0] == nome:
-                    edit_prod_2(lista_estoque[cont][0],lista_estoque[cont][1])
+                    edit_prod_2(lista_estoque[cont][0],lista_estoque[cont][1],lista_estoque,cont)
                     break
                 else:
                     check = 1
@@ -155,9 +176,16 @@ def edit_prod():
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
 
-def edit_prod_2(nome,quant):
+def edit_prod_2(nome,quant,estoque_lista,cont):
     while True:
-        #os.system('cls' if os.name == 'nt' else 'clear')
+        estoque = open('estoque.txt','r')
+        for i,line in enumerate(estoque):
+            if i == cont:
+                line = line[:-1]
+                linhas = line.split(';')
+        nome = linhas[0]
+        quant = linhas[1]
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#        Editando {:^20}        #'.format(nome))
@@ -175,15 +203,16 @@ def edit_prod_2(nome,quant):
         print('###############################################')
         opcao = str(input())
         if opcao == '1':
-            altera_quant()
+            altera_quant(nome,estoque_lista,cont)
         elif opcao == '2':
             altera_nome()
         elif opcao == '3':
             remove_prod()
         
     
-def altera_quant():
+def altera_quant(nome,estoque_lista,cont):
     while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#            Alterando  Quantidade            #')
@@ -200,7 +229,22 @@ def altera_quant():
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-
+        if opcao == 'r':
+            if not quant.isnumeric():
+                print('\33[1;31mERRO: Quantidade inválida, tente novamente\33[m')
+                time.sleep(.500)
+            elif len(quant) > 10:
+                print('\33[1;31mERRO: Quantidade inválida, tente novamente\33[m')
+                time.sleep(.500)
+            else:
+                estoque_lista[cont][1] = quant
+                estoque = open ('estoque.txt','w')
+                contador = 0
+                for contador in range (0,len(estoque_lista)):
+                    estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
+                estoque.close()
+                break
+                
 def altera_nome():
     return 0
 def remove_prod():

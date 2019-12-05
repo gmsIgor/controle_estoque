@@ -1,8 +1,8 @@
 bolo;10
-salgado;20232
-bombom;16
+salgado;100
+bombom;10
 bola;39
-brownie;4000000
+brownie;567
 coca-cola;5
 energetico;10
 chapeu;322
@@ -10,11 +10,11 @@ cafe;10
 capuccino;10
 chocolate;21
 alcool em gel;24
-batata;12
+batata;300
 bola de gude;15
 pastel;4
 mandioca;6
 leite;40
 vinho;2
 rinosoro;13
-garrafa;500
+garrafa;50
