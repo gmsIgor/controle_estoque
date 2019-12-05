@@ -243,13 +243,37 @@ def altera_quant(nome,estoque_lista,cont):
                 for contador in range (0,len(estoque_lista)):
                     estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
                 estoque.close()
+                print('\33[1;92mQuantidade atualizada com sucesso\33[m')
+                time.sleep(.500)
                 break
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
                 
 def altera_nome():
     return 0
 def remove_prod():
-    return 0 
-
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#              Removendo Produto              #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        if opcao == 'r':
+            print('#                                             #')
+            print('#  Digite a senha de \33[36mADM\33[m para confirmar: ', end='')
+            print('#                                             #')
+            print('###############################################')
+            senha = str(input())
 
 def cadastro_usr(adm,vnd):
     while True:
