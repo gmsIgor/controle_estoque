@@ -1,16 +1,20 @@
 import menu
 import login
 
+
 def main():
+
+    login.carrega_credenciais()
+
     ADMIN = 'admin'
     VENDEDOR = 'vendedor'
     permissao = 'no_permission'
     credenciais =  menu.login()
 
-    credencia(login.credencial_admin, credenciais, ADMIN)
+    credencia(login.get_cred_adm(), credenciais, ADMIN)
 
     if permissao != ADMIN:
-        credencia(login.credencial_proletario, credenciais, VENDEDOR)
+        credencia(login.get_cred_prolet(), credenciais, VENDEDOR)
 
     if permissao != ADMIN and permissao != VENDEDOR:
         print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
@@ -40,6 +44,6 @@ def credencia(credencial, credenciais, perm):
                         if escolha == '3':
                             menu.edit_prod()
                         if escolha == '4':
-                            menu.cadastro_usr(login.credencial_admin,login.credencial_proletario)
+                            menu.cadastro_usr(login.get_cred_adm(),login.get_cred_prolet())
                     #elif escolha == '5':  #Não sei voltar para o menu de login
 main()
