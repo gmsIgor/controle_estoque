@@ -26,7 +26,7 @@ def salva_credenciais():
 
 #----- 
 
-def add_cred_prolet(login, senha):
+def add_cred_prolet(login : str, senha : str):
     credenciais.credencial_proletario[login] = senha
 
 def set_cred_prolet(new_dict):
@@ -37,7 +37,7 @@ def get_cred_prolet():
 
 
 
-def add_cred_adm(login, senha):
+def add_cred_adm(login : str, senha : str):
     credenciais.credencial_admin[login] = senha
 
 def set_cred_admin(new_dict):
@@ -45,11 +45,3 @@ def set_cred_admin(new_dict):
 
 def get_cred_adm():
     return credenciais.credencial_admin
-
-#debug
-#carrega_credenciais()
-#print(credencial_admin)
-
-carrega_credenciais()
-
-print(credenciais.credencial_proletario)

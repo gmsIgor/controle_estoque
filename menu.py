@@ -3,9 +3,12 @@ import itertools
 import math
 import time
 import re
+import login as biri
+import json
 
 
 def login():
+    os.system('cls' if os.name == 'nt' else 'clear')
     print('#############################################')
     print('#            CONTROLE DE ESTOQUE            #')
     print('#############################################')
@@ -283,7 +286,7 @@ def cadastro_usr(adm,vnd):
         print('###############################################')
         print('#                                             #')
         print('#  Login: ',end='')
-        login = str(input())
+        login_b = str(input())
         print('#  Senha: ',end='')
         senha = str(input())
         print('#  Nível de permissão (ADM/VND): ',end='')
@@ -296,19 +299,18 @@ def cadastro_usr(adm,vnd):
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-
         regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
         if opcao == 'r':
-            if login in adm or login in vnd:
+            if login_b in adm or login_b in vnd:
                 print('\33[1;31mERRO: Usuário já existe, tente novamente\33[m')
                 time.sleep(.500)
-            elif len(login) < 4 or len(login) > 15:
+            elif len(login_b) < 4 or len(login_b) > 15:
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
                 time.sleep(.500)
             elif len(senha) < 4 or len(senha) > 15:
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
                 time.sleep(.500)
-            elif regex.search(login) != None or regex.search(senha) != None:
+            elif regex.search(login_b) != None or regex.search(senha) != None:
                 print('A')
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
                 time.sleep(.500)
@@ -318,16 +320,21 @@ def cadastro_usr(adm,vnd):
                 time.sleep(.500)
             else:
                 if perm == 'ADM':
-                    adm[login] = senha
-                    print('add_adm')
-                    return adm,vnd
+                    logins = open('login.json','a')
+                    biri.add_cred_adm(login_b,senha)
+                    biri.salva_credenciais()
+                    print('\33[1;92mUsuário cadastrado com sucesso\33[m')
+                    time.sleep(.500)
+                    
                 elif perm == 'VND':
-                    vnd[login] = senha
-                    print('add_vnd')
-                    return adm,vnd
+                    logins = open('login.json','a')
+                    biri.add_cred_prolet(login_b,senha)
+                    biri.salva_credenciais()
+                    print('\33[1;92mUsuário cadastrado com sucesso\33[m')
+                    time.sleep(.500)
         elif opcao == 's':
             break
-        else:
+        else: 
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
 
