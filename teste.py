@@ -1,54 +1,131 @@
-def add_prod():
-    escolha = str(1)
-    estoquelist=[]
-    estoque = open("estoque.txt",'r+')
-    num_lines = sum(1 for line in estoque)
-    while escolha == str(1):
-        nome = input('entre com o nome do item  ')
-        quantidade = input('Entre com a quantidade do item  ')
-        while not quantidade.isnumeric()  :
-            print('Entre com uma opção válida  : \n')
-            escolha = input('digite (1) para continuar ou (2) para sair \n')
-            quantidade = input('Entre com a nova quantidade')
-        while int(quantidade) < 0 :
-            print('Entre com uma opção válida : \n')
-            
-            escolha = input('digite (1) para continuar ou (2) para sair \n')
-            quantidade = input('Entre com a nova quantidade1')
-        produto = {"Nome:": nome,"quantidade:": quantidade} 
-        escolha = input ('digite(1) para continuar editando ou (2) para sair  ')
-        while escolha != str(1) and escolha != str(2):
-            print('Entre com uma opcao valida : \n')
-            escolha = input('digite(1) para continuar editando ou (2)')
-        estoquelist.append(produto) 
-        contador = 0
-       
+def edit_prod():
+    #função que exclui ou altera a quantidade de  um produto, ou muda nome.
 
-        for contador in range (0,len(estoquelist)):
+estoque = open ('estoque.txt','r+')
 
-            estoque.write(str(num_lines+1)+';' + str(estoquelist[contador]['Nome:']) + ';' + str(estoquelist[contador]['quantidade:']) + '\n')
-            num_lines += 1
+estoque.seek(0,0)
 
-      
+produtos_list = []
+
+estoque_string = estoque.readlines()
+
+for line in estoque_string :
+
+  line = line[:-1]
+
+  linha = line.split(';')
+
+  produtos_list.append(linha)
+
+print(produtos_list)
+
+produto = input('Entre com o produto que deseja editar : \n')
+
+
+for contador in range (0,len(produtos_list)) :
+
+  if produtos_list[contador][0] == produto :
     
+    print('Entre com 1 para excluir,2 para alterar a quantidade ou 3 para renomear.\n')
+    
+    escolha =int(input())
 
-add_prod()
+    if escolha == 1:
+
+      produtos_list.pop(contador)
+
+    if escolha == 2:
+
+      print('Entre com a nova quantidade do produto : ')
+      quantidade = input()
+      produtos_list[contador][1] = quantidade
+    if escolha == 3 :
+
+        novo_nome=input('Entre com o novo nome :\n')
+        produtos_list[contador][0] =  novo_nome
+    break
+
+
+
+estoque.close()
+
+
+estoque = open ('estoque.txt','w')
+
+contador = 0
+
+for contador in range (0,len(produtos_list)) :
+
+  estoque.writelines(str(produtos_list[contador][0]) + ';'+ str(produtos_list[contador][1])+'\n')
+
+estoque.close()
 
 
 
 
-def exibir_estoque():
-    contador = 0
-    estoque = open('estoque.txt','r')
-    for i in estoque:
-        print(i ,';','\n')
-    estoque.close()
+
+# função para procurar o  item no estoque , evitando que alguem tente editar um produto que não está no estoque.
+
+def procura_prod(produto)
+
+estoque = open ('estoque.txt','r+')
+
+estoque.seek(0,0)
+
+produtos_list = []
+
+estoque_string = estoque.readlines()
+
+for line in estoque_string :
+
+  line = line[:-1]
+
+  linha = line.split(';')
+
+  produtos_list.append(linha)
+
+#Esse função pode ser separada pois é necessário transformar em lista para fzer as alterações, vou colocar ela logo em seguida.
+
+contador = 0
+produto-em_estoque = 0
+for contador in range (0,len(produtos_list)):
+# Esse produto será um input do produto que deseja procurar.
+    if produtos_list[contador][0] == produto :
+
+        print('Produto está no estoque') #ou nem precisa disso kk
+        
+        produto_em_estoque = 1
+        
+        return 1
+
+        break
+
+if produto_em_estoque == 0 :
+
+    print('Produto não se encontra no estoque')
+
+    return 0
+
+#A função retorna 1 se estiver no estoque e 0 caso não esteja.
+....................................................................................................................
+#função que transforma o arquivo numa lista :
+
+def cria_lista(arquivo) #Nem sei se esse argumento é necessario, vejam ai.
 
 
+estoque = open ('estoque.txt','r+')
 
+estoque.seek(0,0)
 
+produtos_list = []
 
+estoque_string = estoque.readlines()
 
+for line in estoque_string :
 
+  line = line[:-1]
 
+  linha = line.split(';')
+
+  produtos_list.append(linha)
 
