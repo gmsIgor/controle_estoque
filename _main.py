@@ -45,6 +45,8 @@ def credencia(credencial, credenciais, perm):
                     if escolha == '1':
                         menu.estoque(permissao)
                     elif escolha == '5':
+                        menu.altera_dados(login_usr,permissao)
+                    elif escolha == '6':
                         break
                     elif permissao == 'admin':
                         if escolha == '2':
@@ -53,6 +55,7 @@ def credencia(credencial, credenciais, perm):
                             menu.edit_prod()
                         if escolha == '4':
                             menu.cadastro_usr(login.get_cred_adm(),login.get_cred_prolet())
+                    
                     #elif escolha == '5':  #Não sei voltar para o menu de login
     return permissao
 main()

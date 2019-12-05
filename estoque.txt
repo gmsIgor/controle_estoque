@@ -12,7 +12,4 @@ batata;300
 bola de gude;15
 pastel;4
 mandioca;6
-leite;40
-vinho;2
 rinosoro;13
-garrafa;5

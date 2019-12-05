@@ -6,7 +6,6 @@ import re
 import login as biri
 import json
 
-
 def login():
     os.system('cls' if os.name == 'nt' else 'clear')
     print('#############################################')
@@ -36,7 +35,9 @@ def menu_usr(permissao):
         print('#                                             #')
         print('#  Cadastrar novo funcionário, Digite(4)      #')
         print('#                                             #')
-        print('#  Voltar para a tela de login, Digite(5)     #')
+        print('#  Alterar dados cadastrais, Digite(5)        #')
+        print('#                                             #')
+        print('#  Voltar para a tela de login, Digite(6)     #')
         print('#                                             #')
         print('#  Seu nível de permissão atual é de \33[36mADM\33[m      #')
         print('#                                             #')
@@ -49,7 +50,9 @@ def menu_usr(permissao):
         print('#                                             #')
         print('#  Exibir produto(s), Digite(1)               #')
         print('#                                             #')
-        print('#  Voltar para a tela de login, Digite(5)     #')
+        print('#  Alterar dados cadastrais, Digite(5)        #')
+        print('#                                             #')
+        print('#  Voltar para a tela de login, Digite(6)     #')
         print('#                                             #')
         print('#  Seu nível de permissão atual é de \33[92mVENDEDOR\33[m #')
         print('#                                             #')
@@ -88,7 +91,7 @@ def add_prod():
             for index in produtos:
                 if nome in produtos[cont]:
                     print('\33[1;31mERRO: Produto já existe, tente novamente\33[m')
-                    time.sleep(1.500)
+                    time.sleep(.500)
                     estoque.close()
                 cont += 1
             if len(nome) > 20 or len(quant) > 10:
@@ -155,7 +158,6 @@ def edit_prod():
             produtos = estoque.readlines()
             num_lines = sum(1 for line in estoque)
             lista_estoque = []
-            print(produtos)
             check = 0
             for index in produtos:
                 index = index[:-1]
@@ -209,6 +211,7 @@ def edit_prod_2(nome,quant,estoque_lista,cont):
             altera_nome(nome,estoque_lista,cont)
         elif opcao == '3':
             remove_prod(nome,estoque_lista,cont,quant)
+            break
         
     
 def altera_quant(nome,estoque_lista,cont):
@@ -226,7 +229,7 @@ def altera_quant(nome,estoque_lista,cont):
         print('###############################################')
         print('#                                             #')
         print('#        Digite (r) para prosseguir ou        #')
-        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#   digite (s) para voltar ao menu de edição  #')
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
@@ -258,17 +261,17 @@ def altera_nome(nome,estoque_lista,cont):
         os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
-        print('#            Alterando Nome                   #')
+        print('#               Alterando  Nome               #')
         print('#                                             #')
         print('###############################################')
         print('#                                             #')
-        print('# Novo Nome: ', end='')
+        print('#  Novo Nome: ', end='')
         nome = str(input())
         print('#                                             #')
         print('###############################################')
         print('#                                             #')
         print('#        Digite (r) para prosseguir ou        #')
-        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#   digite (s) para voltar ao menu de edição  #')
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
@@ -279,6 +282,9 @@ def altera_nome(nome,estoque_lista,cont):
             elif len(nome) >20:
                 print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
                 time.sleep(.500)
+            elif procura_prod(nome) == 1:
+                print('\33[1;31mERRO: Nome já usado, tente novamente\33[m')
+                time.sleep(.500)
             else:
                 estoque_lista[cont][0] = nome
                 estoque = open ('estoque.txt','w')
@@ -286,7 +292,14 @@ def altera_nome(nome,estoque_lista,cont):
                 for contador in range (0,len(estoque_lista)):
                     estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
                 estoque.close()
+                print('\33[1;92mNome atualizado com sucesso\33[m')
+                time.sleep(.500)
                 break
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
             
 def remove_prod(nome,estoque_lista,cont,quant):
     while True:
@@ -303,39 +316,44 @@ def remove_prod(nome,estoque_lista,cont,quant):
         print('###############################################')
         opcao = str(input())
         if opcao == 'r':
-            produto = nome
-
-            procura_prod(produto)
-            for contador in range (0,len(estoque_lista)) :
-                if  estoque_lista[contador][0] == produto :
-                    estoque_lista.pop(contador)
-
-                    print(estoque_lista)
-
-                    break
-
-            estoque = open ('estoque.txt','w')
-
-            contador = 0
-
-            for contador in range (0,len(estoque_lista)) :
-
-                estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
-
-            estoque.close()
-    
-            break
-
             print('#                                             #')
             print('#  Digite a senha de \33[36mADM\33[m para confirmar: ', end='')
+            senha = str(input())
             print('#                                             #')
             print('###############################################')
-            senha = str(input())
+            for elto in biri.get_cred_adm():
+                if senha == biri.get_cred_adm()[elto]:
+                    produto = nome
+                    procura_prod(produto)
+                    for contador in range (0,len(estoque_lista)) :
+                        if  estoque_lista[contador][0] == produto :
+                            estoque_lista.pop(contador)
+                            print(estoque_lista)
+                            break
+                    estoque = open ('estoque.txt','w')
+                    contador = 0
+                    for contador in range (0,len(estoque_lista)) :
+                        estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1]))
+                        if contador <= len(estoque_lista)-2:
+                            estoque.write('\n')
+                        contador += 1
+                    estoque.close()
+                    print('\33[1;92mProduto removido com sucesso\33[m')
+                    time.sleep(.500)
+                    break
+            print('\33[1;31mERRO: Senha incorreta, voltando ao menu de edição\33[m')
+            time.sleep(.500)
+            break
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
 
 
 def cadastro_usr(adm,vnd):
     while True:
-        #os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
         print('#                                             #')
         print('#            Cadastro Novo Usuário            #')
@@ -395,8 +413,130 @@ def cadastro_usr(adm,vnd):
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
 
-def altera_dados():
-    return 0
+def altera_dados(login_usr,permissao):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#          Alterando dados cadastrais         #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#  Para alterar o login, Digite(1)            #')
+        print('#  Para alterar a senha, Digite(2)            #')
+        print('#  Para voltar ao menu de usuário, Digite(3)  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+
+        print(login_usr)
+        time.sleep(5)
+        if opcao == '1':
+            login_usr = altera_login(login_usr,permissao)
+        elif opcao == '2':
+            altera_senha(login_usr,permissao)
+        elif opcao == '3':
+            break
+
+def altera_login(login_usr,permissao):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#               Alterando Login               #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('# Novo Login: ', end='')
+        login = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#   digite (s) para voltar ao menu de edição  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
+        if opcao == 'r':
+            if login in biri.get_cred_adm() or login in biri.get_cred_prolet() :
+                print('\33[1;31mERRO: Login já existente, tente novamente\33[m')
+                time.sleep(.500)
+            elif len(login) < 4 or len(login) > 15:
+                print('\33[1;31mERRO: Login inválido, tente novamente\33[m')
+                time.sleep(.500)
+            elif regex.search(login) != None:
+                print('\33[1;31mERRO: Login inválido, tente novamente\33[m')
+                time.sleep(.500)
+            else:
+                if permissao == 'admin':
+                    senha = biri.get_cred_adm()[login_usr]
+                    biri.remove_cred_adm(login_usr)
+                    biri.add_cred_adm(login, senha)
+                elif permissao == 'vendedor':
+                    senha = biri.get_cred_prolet()[login_usr]
+                    biri.remove_cred_prolet(login_usr)
+                    biri.add_cred_prolet(login, senha)
+                biri.salva_credenciais()
+                print('\33[1;92mLogin alterado com sucesso\33[m')
+                time.sleep(.500)
+                break
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
+    
+    return login
+                
+
+
+
+
+
+def altera_senha(login_usr,permissao):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#               Alterando Senha               #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('# Nova Senha: ', end='')
+        senha = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#   digite (s) para voltar ao menu de edição  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
+        if opcao == 'r':
+            if len(senha) < 4 or len(senha) > 15:
+                print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
+                time.sleep(.500)
+            elif regex.search(senha) != None:
+                print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
+                time.sleep(.500)
+            else:
+                if permissao == 'admin':
+                    biri.altera_senha_adm(login_usr,senha)
+                elif permissao == 'vendedor':
+                    biri.altera_senha_prolet(login_usr,senha)
+                biri.salva_credenciais()
+                print('\33[1;92mSenha alterada com sucesso\33[m')
+                time.sleep(.500)
+                break
+        elif opcao == 's':
+            break
+        else:
+            print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
+            time.sleep(.500)
+        
+
 
 def estoque(permissao):
     pg = 1
