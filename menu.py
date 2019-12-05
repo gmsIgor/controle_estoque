@@ -206,9 +206,9 @@ def edit_prod_2(nome,quant,estoque_lista,cont):
         if opcao == '1':
             altera_quant(nome,estoque_lista,cont)
         elif opcao == '2':
-            altera_nome()
+            altera_nome(nome,estoque_lista,cont)
         elif opcao == '3':
-            remove_prod()
+            remove_prod(nome,estoque_lista,cont,quant)
         
     
 def altera_quant(nome,estoque_lista,cont):
@@ -253,9 +253,42 @@ def altera_quant(nome,estoque_lista,cont):
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
                 
-def altera_nome():
-    return 0
-def remove_prod():
+def altera_nome(nome,estoque_lista,cont):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#            Alterando Nome                   #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('# Novo Nome: ', end='')
+        nome = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        if opcao == 'r':
+            if nome.isnumeric():
+                print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
+                time.sleep(.500)
+            elif len(nome) >20:
+                print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
+                time.sleep(.500)
+            else:
+                estoque_lista[cont][0] = nome
+                estoque = open ('estoque.txt','w')
+                contador = 0
+                for contador in range (0,len(estoque_lista)):
+                    estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
+                estoque.close()
+                break
+            
+def remove_prod(nome,estoque_lista,cont,quant):
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         print('##############CONTROLE DE ESTOQUE##############')
@@ -270,11 +303,35 @@ def remove_prod():
         print('###############################################')
         opcao = str(input())
         if opcao == 'r':
+            produto = nome
+
+            procura_prod(produto)
+            for contador in range (0,len(estoque_lista)) :
+                if  estoque_lista[contador][0] == produto :
+                    estoque_lista.pop(contador)
+
+                    print(estoque_lista)
+
+                    break
+
+            estoque = open ('estoque.txt','w')
+
+            contador = 0
+
+            for contador in range (0,len(estoque_lista)) :
+
+                estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
+
+            estoque.close()
+    
+            break
+
             print('#                                             #')
             print('#  Digite a senha de \33[36mADM\33[m para confirmar: ', end='')
             print('#                                             #')
             print('###############################################')
             senha = str(input())
+
 
 def cadastro_usr(adm,vnd):
     while True:
