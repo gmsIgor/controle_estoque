@@ -5,6 +5,7 @@ import time
 import re
 import login as biri
 import json
+tempo = 1
 
 def login():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -86,32 +87,31 @@ def add_prod():
         if opcao == 'r':
             estoque = open('estoque.txt','r')
             produtos = estoque.readlines()
-            print(produtos)
             cont = 0
             for index in produtos:
                 if nome in produtos[cont]:
                     print('\33[1;31mERRO: Produto já existe, tente novamente\33[m')
-                    time.sleep(.500)
+                    time.sleep(tempo)
                     estoque.close()
                 cont += 1
             if len(nome) > 20 or len(quant) > 10:
                 print('\33[1;31mERRO: Nome ou quantidade inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif not quant.isnumeric():
                 print('\33[1;31mERRO: Nome ou quantidade inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 estoque.close()
                 estoque = open("estoque.txt", 'a')
                 estoque.write('\n' + nome + ';' + quant)
                 print('\33[1;92mProduto adicionado com sucesso\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
                 estoque.close()
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
 
 def procura_prod(produto):
     estoque = open ('estoque.txt','r+')
@@ -171,13 +171,13 @@ def edit_prod():
                     check = 1
             if check == 1:
                 print('\33[1;31mERRO: Produto não encontrado, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
 
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
 
 def edit_prod_2(nome,quant,estoque_lista,cont):
     while True:
@@ -236,10 +236,10 @@ def altera_quant(nome,estoque_lista,cont):
         if opcao == 'r':
             if not quant.isnumeric():
                 print('\33[1;31mERRO: Quantidade inválida, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif len(quant) > 10:
                 print('\33[1;31mERRO: Quantidade inválida, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 estoque_lista[cont][1] = quant
                 estoque = open ('estoque.txt','w')
@@ -248,13 +248,13 @@ def altera_quant(nome,estoque_lista,cont):
                     estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
                 estoque.close()
                 print('\33[1;92mQuantidade atualizada com sucesso\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
                 break
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
                 
 def altera_nome(nome,estoque_lista,cont):
     while True:
@@ -278,13 +278,13 @@ def altera_nome(nome,estoque_lista,cont):
         if opcao == 'r':
             if nome.isnumeric():
                 print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif len(nome) >20:
                 print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif procura_prod(nome) == 1:
                 print('\33[1;31mERRO: Nome já usado, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 estoque_lista[cont][0] = nome
                 estoque = open ('estoque.txt','w')
@@ -293,13 +293,13 @@ def altera_nome(nome,estoque_lista,cont):
                     estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
                 estoque.close()
                 print('\33[1;92mNome atualizado com sucesso\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
                 break
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
             
 def remove_prod(nome,estoque_lista,cont,quant):
     while True:
@@ -339,16 +339,16 @@ def remove_prod(nome,estoque_lista,cont,quant):
                         contador += 1
                     estoque.close()
                     print('\33[1;92mProduto removido com sucesso\33[m')
-                    time.sleep(.500)
+                    time.sleep(tempo)
                     break
             print('\33[1;31mERRO: Senha incorreta, voltando ao menu de edição\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
             break
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
 
 
 def cadastro_usr(adm,vnd):
@@ -378,40 +378,40 @@ def cadastro_usr(adm,vnd):
         if opcao == 'r':
             if login_b in adm or login_b in vnd:
                 print('\33[1;31mERRO: Usuário já existe, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif len(login_b) < 4 or len(login_b) > 15:
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif len(senha) < 4 or len(senha) > 15:
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif regex.search(login_b) != None or regex.search(senha) != None:
                 print('A')
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif perm != 'ADM' and perm != 'VND':
                 print('B')
                 print('\33[1;31mERRO: Dados Inválidos, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 if perm == 'ADM':
                     logins = open('login.json','a')
                     biri.add_cred_adm(login_b,senha)
                     biri.salva_credenciais()
                     print('\33[1;92mUsuário cadastrado com sucesso\33[m')
-                    time.sleep(.500)
+                    time.sleep(tempo)
                     
                 elif perm == 'VND':
                     logins = open('login.json','a')
                     biri.add_cred_prolet(login_b,senha)
                     biri.salva_credenciais()
                     print('\33[1;92mUsuário cadastrado com sucesso\33[m')
-                    time.sleep(.500)
+                    time.sleep(tempo)
         elif opcao == 's':
             break
         else: 
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
 
 def altera_dados(login_usr,permissao):
     while True:
@@ -459,13 +459,13 @@ def altera_login(login_usr,permissao):
         if opcao == 'r':
             if login in biri.get_cred_adm() or login in biri.get_cred_prolet() :
                 print('\33[1;31mERRO: Login já existente, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif len(login) < 4 or len(login) > 15:
                 print('\33[1;31mERRO: Login inválido, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif regex.search(login) != None:
                 print('\33[1;31mERRO: Login inválido, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 if permissao == 'admin':
                     senha = biri.get_cred_adm()[login_usr]
@@ -477,13 +477,13 @@ def altera_login(login_usr,permissao):
                     biri.add_cred_prolet(login, senha)
                 biri.salva_credenciais()
                 print('\33[1;92mLogin alterado com sucesso\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
                 return login
         elif opcao == 's':
             return login_usr
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
     
     
                 
@@ -515,10 +515,10 @@ def altera_senha(login_usr,permissao):
         if opcao == 'r':
             if len(senha) < 4 or len(senha) > 15:
                 print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             elif regex.search(senha) != None:
                 print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
             else:
                 if permissao == 'admin':
                     biri.altera_senha_adm(login_usr,senha)
@@ -526,13 +526,13 @@ def altera_senha(login_usr,permissao):
                     biri.altera_senha_prolet(login_usr,senha)
                 biri.salva_credenciais()
                 print('\33[1;92mSenha alterada com sucesso\33[m')
-                time.sleep(.500)
+                time.sleep(tempo)
                 break
         elif opcao == 's':
             break
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
-            time.sleep(.500)
+            time.sleep(tempo)
         
 
 

@@ -22,8 +22,7 @@ def main():
 
         if permissao == 'no_permission':
             print('\33[1;31mERRO: Login ou senha inválidos, tente novamente\33[m')
-            time.sleep(5)
-        #print('\33[1,92mpermissao:\33[m',permissao)
+            time.sleep(2)
 
 def credencia(credencial, credenciais, perm):
     login_dic : str
@@ -56,6 +55,5 @@ def credencia(credencial, credenciais, perm):
                         if escolha == '4':
                             menu.cadastro_usr(login.get_cred_adm(),login.get_cred_prolet())
                     
-                    #elif escolha == '5':  #Não sei voltar para o menu de login
     return permissao
 main()

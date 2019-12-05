@@ -1,5 +1,0 @@
-
-
-def compra():
-    return
-
