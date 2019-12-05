@@ -250,8 +250,41 @@ def altera_quant(nome,estoque_lista,cont):
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
                 
-def altera_nome():
-    return 0
+def altera_nome(nome,estoque_lista,cont):
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('##############CONTROLE DE ESTOQUE##############')
+        print('#                                             #')
+        print('#            Alterando Nome                   #')
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('# Novo Nome: ', end='')
+        nome = str(input())
+        print('#                                             #')
+        print('###############################################')
+        print('#                                             #')
+        print('#        Digite (r) para prosseguir ou        #')
+        print('#  digite (s) para voltar ao menu de usuário  #')
+        print('#                                             #')
+        print('###############################################')
+        opcao = str(input())
+        if opcao == 'r':
+            if nome.isnumeric():
+                print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
+                time.sleep(.500)
+            elif len(nome) >20:
+                print('\33[1;31mERRO: Nome inválido, tente novamente\33[m')
+                time.sleep(.500)
+            else:
+                estoque_lista[cont][0] = nome
+                estoque = open ('estoque.txt','w')
+                contador = 0
+                for contador in range (0,len(estoque_lista)):
+                    estoque.writelines(str(estoque_lista[contador][0]) + ';'+ str(estoque_lista[contador][1])+'\n')
+                estoque.close()
+                break
+            
 def remove_prod():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
