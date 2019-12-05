@@ -517,7 +517,7 @@ def altera_senha(login_usr,permissao):
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]éúóáíàèìòùâêîôûãõ')
         if opcao == 'r':
             if len(senha) < 4 or len(senha) > 15:
                 print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
