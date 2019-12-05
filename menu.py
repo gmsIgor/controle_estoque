@@ -429,8 +429,6 @@ def altera_dados(login_usr,permissao):
         print('###############################################')
         opcao = str(input())
 
-        print(login_usr)
-        time.sleep(5)
         if opcao == '1':
             login_usr = altera_login(login_usr,permissao)
         elif opcao == '2':
