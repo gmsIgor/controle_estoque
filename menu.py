@@ -378,7 +378,7 @@ def cadastro_usr(adm,vnd):
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]éúóáíàèìòùâêîôûãõ')
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
         if opcao == 'r':
             if login_b in adm or login_b in vnd:
                 print('\33[1;31mERRO: Usuário já existe, tente novamente\33[m')
@@ -460,7 +460,7 @@ def altera_login(login_usr,permissao):
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]éúóáíàèìòùâêîôûãõ')
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
         if opcao == 'r':
             if login in biri.get_cred_adm() or login in biri.get_cred_prolet() :
                 print('\33[1;31mERRO: Login já existente, tente novamente\33[m')
@@ -517,7 +517,7 @@ def altera_senha(login_usr,permissao):
         print('#                                             #')
         print('###############################################')
         opcao = str(input())
-        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]éúóáíàèìòùâêîôûãõ')
+        regex = re.compile('[@_!#$%^&*()<>?/\|{}~:]')
         if opcao == 'r':
             if len(senha) < 4 or len(senha) > 15:
                 print('\33[1;31mERRO: Senha inválida, tente novamente\33[m')
