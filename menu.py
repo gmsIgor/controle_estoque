@@ -2,7 +2,6 @@ import os
 import itertools
 import math
 import time
-import login
 import re
 
 
@@ -104,7 +103,6 @@ def add_prod():
                 estoque.close()
         elif opcao == 's':
             break
-            estoque.close()
         else:
             print('\33[1;31mERRO: Comando Inválido, tente novamente\33[m')
             time.sleep(.500)
