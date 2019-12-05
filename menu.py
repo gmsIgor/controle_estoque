@@ -588,9 +588,6 @@ def estoque(permissao):
                     linhaant = linhatemp
                 linha = num_lines
                 pg = pgtot
-            print(linhatemp)
-            print(linhaant)
-            print(linha)
         elif escolha == 's':
             break
 
